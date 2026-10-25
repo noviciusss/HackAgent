@@ -36,11 +36,13 @@ def parse_usage_file(path: Path) -> list[dict[str, Any]]:
 
 
 def generate_usage_report(
-    usage_path: str | Path = "usage/usage.jsonl",
+    usage_path: str | Path = "code/evaluation/usage.jsonl",
     output_path: str | Path = "code/evaluation/usage_report.md",
     total_requests: int = 518,
 ) -> str:
     path = Path(usage_path)
+    if not path.is_file() and Path("usage/usage.jsonl").is_file():
+        path = Path("usage/usage.jsonl")
     records = parse_usage_file(path)
     out_file = Path(output_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
@@ -151,7 +153,7 @@ def generate_usage_report(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate usage_report.md per EXTRAS.md §1")
-    parser.add_argument("--usage-file", default="usage/usage.jsonl", help="Path to usage.jsonl file")
+    parser.add_argument("--usage-file", default="code/evaluation/usage.jsonl", help="Path to usage.jsonl file")
     parser.add_argument("--output", default="code/evaluation/usage_report.md", help="Output Markdown report path")
     parser.add_argument("--total-requests", type=int, default=518, help="Total number of requests in audit run")
     args = parser.parse_args()

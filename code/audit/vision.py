@@ -45,7 +45,8 @@ Instructions:
 
 
 def _usage_path(repo_root: Path) -> Path:
-    path = repo_root / "usage" / "usage.jsonl"
+    code_dir = Path(__file__).resolve().parent.parent
+    path = code_dir / "evaluation" / "usage.jsonl"
     path.parent.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -53,6 +54,9 @@ def _usage_path(repo_root: Path) -> Path:
 def _append_usage(repo_root: Path, record: dict[str, Any]) -> None:
     with _usage_path(repo_root).open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
+    if (repo_root / "usage").is_dir():
+        with (repo_root / "usage" / "usage.jsonl").open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
 
 
 def _cache_key(data: bytes, model: str) -> str:
@@ -60,8 +64,13 @@ def _cache_key(data: bytes, model: str) -> str:
     return hashlib.sha256(f"{digest}:{PROMPT_VERSION}:{model}".encode("utf-8")).hexdigest()
 
 
-def _cache_file(repo_root: Path, key: str) -> Path:
-    path = repo_root / "usage" / "vision_cache" / f"{key}.json"
+def _cache_file(key: str) -> Path:
+    code_dir = Path(__file__).resolve().parent.parent
+    path = code_dir / "vision_cache" / f"{key}.json"
+    if not path.exists():
+        alt = code_dir.parent / "usage" / "vision_cache" / f"{key}.json"
+        if alt.exists():
+            return alt
     path.parent.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -171,13 +180,16 @@ def load_screenshot_facts(dataset_root: Path, evidence: list[dict[str, str]]) ->
     api_key_present = bool(vision_api_key())
     image_entries = [entry for entry in evidence if Path(entry.get("file_path", "")).suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}]
     facts: list[Fact] = []
+    cache_hits = 0
+    api_calls = 0
     for entry in image_entries:
         path = dataset_root / entry["file_path"]
         data = path.read_bytes()
         key = _cache_key(data, model)
-        cache_path = _cache_file(repo_root, key)
+        cache_path = _cache_file(key)
         base = {"kind": "vision", "file_id": entry["file_id"], "cache_key": key, "model": model, "prompt_version": PROMPT_VERSION}
         if cache_path.exists():
+            cache_hits += 1
             payload = json.loads(cache_path.read_text(encoding="utf-8"))
             _append_usage(repo_root, {**base, "event": "cache_hit", "input_tokens": 0, "output_tokens": 0, "cost_usd": 0.0})
             for item in payload.get("facts", []):
@@ -190,6 +202,7 @@ def load_screenshot_facts(dataset_root: Path, evidence: list[dict[str, str]]) ->
             continue
 
         try:
+            api_calls += 1
             call = call_vision(data, PROMPT, mimetypes.guess_type(path.name)[0] or "image/png")
             structured = _structured_facts(call.content)
             cache_path.write_text(json.dumps({"facts": structured}, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
@@ -204,4 +217,5 @@ def load_screenshot_facts(dataset_root: Path, evidence: list[dict[str, str]]) ->
             _append_usage(repo_root, {**base, "event": "text_only_fallback", "reason": f"vision API error: {exc}", "input_tokens": 0, "output_tokens": 0, "cost_usd": 0.0})
             continue
 
+    print(f"cache hits: {cache_hits}, api calls: {api_calls}")
     return facts

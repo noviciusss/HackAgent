@@ -45,8 +45,10 @@ def run(dataset_dir: str | Path, out_path: str | Path, requests_file: str | Path
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset-dir", default="../dataset")
-    parser.add_argument("--out", default="../output.csv")
+    dataset_default = "dataset" if Path("dataset").is_dir() else "../dataset"
+    out_default = "output.csv" if Path("dataset").is_dir() else "../output.csv"
+    parser.add_argument("--dataset-dir", default=dataset_default)
+    parser.add_argument("--out", default=out_default)
     parser.add_argument("--requests-file", default=None)
     parser.add_argument("--no-vision", action="store_true", help="Disable vision extraction")
     args = parser.parse_args()

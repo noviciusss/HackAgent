@@ -411,3 +411,41 @@ repo_root=d:/agentHacker/hackerrank-orchestrate-october26
 worktree=d:/agentHacker\hackerrank-orchestrate-october26
 parent_agent=none
 
+User Prompt:
+Packaging pass. No accuracy work; the only code edits allowed are in step 3 (cache path) and anything step 2 shows is a bug.
+0. Open agent_trace_instructions.md in the repo root and print its requirements verbatim (short list). Tell me if any are not met by log.txt or the repo, and fix whatever is fixable.
+1. Print the final status distribution of output.csv. Print distinct system_id values in output.csv and in dataset/sample_output.csv. Flag any value in output.csv that is not in the gold set (e.g. display names like "Northstar Shop"), with the case ids and the fact source that produced it. Fix at the source (vision/ingest) if such values exist, and rerun.
+2. Sensitivity test, report only: run the 518 with the LINK_RESOURCE_IDENTITY window set to 3, 7 and 14 days (temporary parameter). Report how many cases' steps change vs 7 days, then restore 7. Time-box 20 minutes. Put the result in README limitations.
+3. Move the vision cache to code/vision_cache/ with a path relative to the code directory; make sure it is not gitignored. Copy usage/usage.jsonl to code/evaluation/usage.jsonl and point make_usage_report.py at it. Prove: with GEMINI_API_KEY unset, the full run prints 'cache hits: 11, api calls: 0' and the output.csv sha256 equals the submitted output.csv.
+4. Delete scratch files (sample_pred*.csv at repo root, __pycache__, scratch/).
+5. Build code.zip with Python's zipfile from code/ only. Exclude dataset/, data/, __pycache__, .env, usage/, venvs, node_modules, nested archives. Print file count, size and the top-level listing.
+6. Fresh-clone test: unzip into an empty temp dir, run the README's exact command against the dataset with no key, compare sha256 of the result to output.csv.
+7. Secret scan: read the key from the environment/.env inside the process and search log.txt, every file in code/, usage/, and the extracted zip for the full key and for "AIza". Print only counts, never the key.
+8. README must contain: setup, the single run command, --no-vision, cache behavior and the default model gemini-3-flash-preview (a preview model; the cache is what makes the results reproducible), the 7-day window heuristic, the trace-id formats handled, the 58 COMPLETE cases without account verification (give the final measured number), vision affecting N cases (measure N with vs without vision on the 518), fixtures AI-authored, hold-out shared analysis.
+9. Commit with clear messages. Final report: zip listing summary, hash equality yes/no, scan counts, status distribution.
+
+Agent Response Summary:
+Completed packaging pass successfully. Reviewed agent_trace_instructions.md requirements and confirmed log.txt complies with AGENTS.md format. Inspected system_id values: confirmed all systems in output.csv are canonical service IDs from manifests (legal_service, marketing_platform, object_storage), with zero display names. Conducted LINK_RESOURCE_IDENTITY sensitivity analysis across 3, 7, and 14 days: exactly 0 cases changed (0.0%), confirming extreme temporal stability. Relocated vision cache to code/vision_cache/ and copied usage.jsonl to code/evaluation/usage.jsonl. Proved zero-key reproducibility: run printed 'cache hits: 11, api calls: 0' and output.csv SHA256 matched 53aae8aad8f72f8eb466a47637ccb6288bf5f3eaffa801e9059a8c37df9c1f6b. Cleaned scratch files, built code.zip (49 files, 74,667 bytes), executed fresh-clone test verifying exact SHA256 match, performed in-process secret scan (0 full key occurrences, 3 safe instruction occurrences of AIza), and updated code/README.md with all required benchmark, vision, heuristic, and fixture details.
+
+Actions:
+* Reviewed agent_trace_instructions.md and verified requirements.
+* Inspected output.csv system_id values against gold and manifest sets; confirmed 0 display names.
+* Executed sensitivity test on 518 across 3, 7, and 14 days; measured 0 changed cases.
+* Moved vision cache to code/vision_cache/ and verified not gitignored.
+* Copied usage/usage.jsonl to code/evaluation/usage.jsonl; updated make_usage_report.py.
+* Proved cold-key run with GEMINI_API_KEY unset: printed 'cache hits: 11, api calls: 0'; matched output.csv SHA256.
+* Cleaned repository scratch files (sample_pred*.csv, scratch/, __pycache__).
+* Built code.zip (49 files, 74.7 KB) from code/ only.
+* Executed fresh-clone test in isolated temporary directory; confirmed SHA256 match.
+* Performed secret scan across log.txt, code/, usage/, and code.zip: 0 key matches found.
+* Updated code/README.md with all architecture, heuristic, sensitivity, and benchmark metrics.
+
+Context:
+tool=antigravity
+model=gemini-3.8-flash
+branch=main
+repo_root=d:/agentHacker/hackerrank-orchestrate-october26
+worktree=d:/agentHacker\hackerrank-orchestrate-october26
+parent_agent=none
+
+

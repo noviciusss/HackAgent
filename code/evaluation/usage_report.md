@@ -3,7 +3,7 @@
 ## 1. Executive Summary
 
 - **Total Requests Audited**: 518
-- **External Model Calls**: 443
+- **External Model Calls**: 454
 - **Total Input Tokens**: 15,217
 - **Total Output Tokens**: 6,116
 - **Total Tokens**: 21,333
@@ -16,10 +16,10 @@
 | Provider | Model Name | Calls | Input Tokens | Output Tokens | Total Tokens | Cost (USD) |
 |---|---|---|---|---|---|---|
 | unknown_provider | gemini-2.5-flash | 3 | 0 | 0 | 0 | $0.0000 |
-| unknown_provider | gemini-3-flash-preview | 440 | 15,217 | 6,116 | 21,333 | $0.0336 |
-| **Overall** | **All Models** | **443** | **15,217** | **6,116** | **21,333** | **$0.0336** |
+| unknown_provider | gemini-3-flash-preview | 451 | 15,217 | 6,116 | 21,333 | $0.0336 |
+| **Overall** | **All Models** | **454** | **15,217** | **6,116** | **21,333** | **$0.0336** |
 
 ## 3. Operational Characteristics
 
-- **Average Call Latency**: Computed across 443 invocations.
+- **Average Call Latency**: Computed across 454 invocations.
 - **Cache Policy**: Cold cache verification completed on final run.
