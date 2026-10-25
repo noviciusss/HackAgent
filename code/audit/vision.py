@@ -127,8 +127,16 @@ def _fact_from_vision(evidence_id: str, captured_at: datetime | None, item: dict
     resource_id = item.get("resource_id", "")
     if not resource_id:
         return None
+    identifiers = list(item.get("identifiers", []))
+    for ident in identifiers:
+        if any(ident.startswith(p) for p in ("account_", "support_", "analytics_", "marketing_", "search_", "export_", "backup_", "data_flow_", "audit_record_")):
+            resource_id = ident
+            break
+
     raw_system = item.get("system", "")
     category = _category_from_resource(resource_id, raw_system)
+    if not category:
+        return None
     system = _system_for_category(category, raw_system)
     
     # Do NOT map "HEALTHY" to any pipeline state.
@@ -142,8 +150,9 @@ def _fact_from_vision(evidence_id: str, captured_at: datetime | None, item: dict
             state = obs_state
 
     observed = parse_time(item.get("timestamp") or item.get("created"))
-    identifiers = list(item.get("identifiers", []))
-    values = _identifier_values(identifiers + [resource_id, system, state])
+    values = _identifier_values(identifiers)
+    if not values:
+        return None
     details = {
         "identifiers": identifiers,
         "region": item.get("region", ""),
