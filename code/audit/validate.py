@@ -73,6 +73,8 @@ class ValidationReport:
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     status_counts: dict[str, int] = field(default_factory=lambda: {"COMPLETE": 0, "INCOMPLETE": 0, "NOT_APPLICABLE": 0})
+    complete_empty_count: int = 0
+    complete_no_account_absent_count: int = 0
 
 
 def load_manifest_sets(dataset_dir: Path | None) -> tuple[set[str], set[str], set[str], list[str]]:
@@ -294,6 +296,17 @@ def validate_file(
 
         # Check status constraints on COMPLETE
         if status == "COMPLETE":
+            if len(steps) == 0:
+                report.complete_empty_count += 1
+                report.errors.append(f"{case_id}: COMPLETE status must have non-empty steps_json, got '[]'")
+            has_acc_absent = any(
+                s.get("phase") == "VERIFICATION"
+                and s.get("operation") == "VERIFY_RECORD_ABSENT"
+                and (s.get("system_id") == "account_service" or "account_" in s.get("resource_id", ""))
+                for s in steps
+            )
+            if not has_acc_absent:
+                report.complete_no_account_absent_count += 1
             non_verif = [s for s in steps if s.get("phase") != "VERIFICATION"]
             if non_verif:
                 report.errors.append(f"{case_id}: COMPLETE status contains non-VERIFICATION steps: {[s.get('operation') for s in non_verif]}")
@@ -338,6 +351,8 @@ def main() -> None:
     print("\n--- Validation Results ---")
     print(f"Total Rows Checked: {report.total_rows}")
     print(f"Status Distribution: {report.status_counts}")
+    print(f"COMPLETE with [] steps: {report.complete_empty_count}")
+    print(f"COMPLETE with no account VERIFY_RECORD_ABSENT: {report.complete_no_account_absent_count}")
     print(f"Passed: {report.passed}")
 
     if report.warnings:

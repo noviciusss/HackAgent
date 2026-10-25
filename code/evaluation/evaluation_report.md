@@ -4,10 +4,10 @@
 
 - **Sample Cases Evaluated**: 32
 - **Case-Level Status Accuracy**: 100.00%
-- **Step F1 (With Evidence)**: 0.927
-- **Step F1 (Without Evidence)**: 0.927
-- **Sequence Exact-Match Rate**: 50.00%
-- **Mean Ordered LCS Ratio**: 0.883
+- **Step F1 (With Evidence)**: 0.934
+- **Step F1 (Without Evidence)**: 0.934
+- **Sequence Exact-Match Rate**: 53.12%
+- **Mean Ordered LCS Ratio**: 0.890
 
 ## 2. Status Accuracy & Confusion Matrix
 
@@ -23,8 +23,8 @@ Overall status accuracy on sample dataset: **100.00%** (32/32)
 
 | Metric | Precision | Recall | F1 Score | TP | FP | FN |
 |---|---|---|---|---|---|---|
-| **With Evidence ID** | 0.972 | 0.886 | **0.927** | 171 | 5 | 22 |
-| **Without Evidence ID** | 0.972 | 0.886 | **0.927** | 171 | 5 | 22 |
+| **With Evidence ID** | 0.988 | 0.886 | **0.934** | 171 | 2 | 22 |
+| **Without Evidence ID** | 0.988 | 0.886 | **0.934** | 171 | 2 | 22 |
 
 ## 4. Field-Level Accuracy
 
@@ -32,17 +32,17 @@ Field-level accuracy evaluated on aligned prediction steps against ground truth:
 
 | Field Name | Accuracy | Target Description |
 |---|---|---|
-| `phase` | **88.27%** | FINDING, REMEDIATION, or VERIFICATION lifecycle phase |
-| `system_id` | **87.76%** | Target service or platform name in system inventory |
-| `resource_id` | **86.73%** | Exact unique resource identifier |
-| `operation` | **88.27%** | Canonical permitted operation name |
-| `state` | **88.27%** | Expected resource state (PRESENT, ABSENT, REDACTED, ANONYMIZED, etc.) |
-| `evidence_id` | **88.27%** | Attributed citation (file_id, activity_id, or audit_id) |
+| `phase` | **89.64%** | FINDING, REMEDIATION, or VERIFICATION lifecycle phase |
+| `system_id` | **89.64%** | Target service or platform name in system inventory |
+| `resource_id` | **88.60%** | Exact unique resource identifier |
+| `operation` | **89.64%** | Canonical permitted operation name |
+| `state` | **89.64%** | Expected resource state (PRESENT, ABSENT, REDACTED, ANONYMIZED, etc.) |
+| `evidence_id` | **89.64%** | Attributed citation (file_id, activity_id, or audit_id) |
 
 ## 5. Sequence and Array Accuracy
 
-- **Exact Array Match Rate**: 50.00% (16/32)
-- **Ordered Longest Common Subsequence (LCS) Ratio**: 0.883
+- **Exact Array Match Rate**: 53.12% (17/32)
+- **Ordered Longest Common Subsequence (LCS) Ratio**: 0.890
 
 Sequence scoring validates both step completeness and the strict required canonical lifecycle ordering: FINDING before REMEDIATION before VERIFICATION, followed by operation hierarchy, system_id, and resource_id.
 
@@ -74,7 +74,7 @@ All entries below are derived directly from [`code/docs/DECISIONS.md`](../docs/D
 
 ## 8. Per-Case Sample Differences
 
-Total cases with step or status variance on sample set: 16
+Total cases with step or status variance on sample set: 15
 
 ### Case `case_03`
 - **Status**: Predicted `COMPLETE` vs Expected `COMPLETE`
@@ -158,72 +158,6 @@ Total cases with step or status variance on sample set: 16
     "state": "ANONYMIZED",
     "step_no": 2,
     "system_id": "analytics_platform"
-  }
-]
-```
-
-### Case `case_17`
-- **Status**: Predicted `INCOMPLETE` vs Expected `INCOMPLETE`
-- **Step Counts**: Predicted 8 steps, Expected 5 steps
-```json
-// Predicted (8 steps):
-[
-  {
-    "step_no": 1,
-    "phase": "FINDING",
-    "system_id": "Account Platform",
-    "resource_id": "user_17",
-    "operation": "REPORT_REMAINING_RECORD",
-    "state": "PRESENT",
-    "evidence_id": "evidence_42"
-  },
-  {
-    "step_no": 2,
-    "phase": "FINDING",
-    "system_id": "backup_service",
-    "resource_id": "backup_3245",
-    "operation": "REPORT_RESTORE_RISK",
-    "state": "ACTIVE",
-    "evidence_id": "evidence_01"
-  },
-  {
-    "step_no": 3,
-    "phase": "REMEDIATION",
-    "system_id": "backup_service",
-    "resource_id": "backup_3245",
-    "operation": "BLOCK_RESTORE",
-    "state": "BLOCKED",
-    "evidence_id": ""
-  }
-]
-// Expected (5 steps):
-[
-  {
-    "step_no": 1,
-    "phase": "FINDING",
-    "system_id": "backup_service",
-    "resource_id": "backup_3245",
-    "operation": "REPORT_RESTORE_RISK",
-    "state": "ACTIVE",
-    "evidence_id": "evidence_01"
-  },
-  {
-    "step_no": 2,
-    "phase": "REMEDIATION",
-    "system_id": "backup_service",
-    "resource_id": "backup_3245",
-    "operation": "BLOCK_RESTORE",
-    "state": "BLOCKED",
-    "evidence_id": ""
-  },
-  {
-    "step_no": 3,
-    "phase": "VERIFICATION",
-    "system_id": "account_service",
-    "resource_id": "account_4092",
-    "operation": "VERIFY_RECORD_ABSENT",
-    "state": "ABSENT",
-    "evidence_id": ""
   }
 ]
 ```
@@ -647,6 +581,72 @@ Total cases with step or status variance on sample set: 16
     "phase": "VERIFICATION",
     "system_id": "support_platform",
     "resource_id": "support_4715",
+    "operation": "VERIFY_RECORD_REDACTED",
+    "state": "REDACTED",
+    "evidence_id": "evidence_92"
+  }
+]
+```
+
+### Case `case_27`
+- **Status**: Predicted `COMPLETE` vs Expected `COMPLETE`
+- **Step Counts**: Predicted 4 steps, Expected 6 steps
+```json
+// Predicted (4 steps):
+[
+  {
+    "step_no": 1,
+    "phase": "VERIFICATION",
+    "system_id": "security_service",
+    "resource_id": "audit_record_3830",
+    "operation": "VERIFY_RECORD_PRESENT",
+    "state": "PRESENT",
+    "evidence_id": "evidence_92"
+  },
+  {
+    "step_no": 2,
+    "phase": "VERIFICATION",
+    "system_id": "support_platform",
+    "resource_id": "support_4707",
+    "operation": "VERIFY_RECORD_REDACTED",
+    "state": "REDACTED",
+    "evidence_id": "evidence_92"
+  },
+  {
+    "step_no": 3,
+    "phase": "VERIFICATION",
+    "system_id": "integration_service",
+    "resource_id": "data_flow_2295",
+    "operation": "VERIFY_DATA_FLOW_DISABLED",
+    "state": "DISABLED",
+    "evidence_id": "evidence_92"
+  }
+]
+// Expected (6 steps):
+[
+  {
+    "step_no": 1,
+    "phase": "VERIFICATION",
+    "system_id": "account_service",
+    "resource_id": "account_3866",
+    "operation": "VERIFY_RECORD_ABSENT",
+    "state": "ABSENT",
+    "evidence_id": "evidence_92"
+  },
+  {
+    "step_no": 2,
+    "phase": "VERIFICATION",
+    "system_id": "security_service",
+    "resource_id": "audit_record_3830",
+    "operation": "VERIFY_RECORD_PRESENT",
+    "state": "PRESENT",
+    "evidence_id": "evidence_92"
+  },
+  {
+    "step_no": 3,
+    "phase": "VERIFICATION",
+    "system_id": "support_platform",
+    "resource_id": "support_4707",
     "operation": "VERIFY_RECORD_REDACTED",
     "state": "REDACTED",
     "evidence_id": "evidence_92"

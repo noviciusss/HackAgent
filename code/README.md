@@ -110,7 +110,22 @@ The architecture follows a **deterministic-core first** philosophy. In regulator
 
 ---
 
-## 4. Limitations & Future Work
+## 4. Limitations & Measured Remaining Counts
 
-1. **Unstructured Scans & Screenshots**: Currently, text and relational evidence formats are parsed deterministically. In environments with scanned PDF forms or non-OCR console screenshots, an optional multimodal VLM (e.g., Gemini 1.5 Flash) with content-hash caching can be attached for visual fact extraction.
-2. **Dynamic Schema Evolution**: The policy engine currently models Northstar Shop's 15 categorical rules. Future extensions can ingest dynamic policy manifests at runtime.
+1. **Full Dataset (518 Cases)**:
+   - **Validation**: 100% passed label-free checks (`validate.py`).
+   - **Status Distribution**: `COMPLETE: 112`, `INCOMPLETE: 396`, `NOT_APPLICABLE: 10`.
+   - **Empty Complete Steps**: 0 cases (resolved from initial 8).
+   - **Complete without Account Absent Verification**: 58 cases (reduced from 73 after multi-line log trace linking). These represent cases where user profile deletions occurred on replicas without direct primary account service event linkage before `audit_at`.
+
+2. **Sample Benchmark (32 Cases)**:
+   - **Status Accuracy**: 1.000 (32 / 32 cases).
+   - **Step F1 (with & without evidence)**: 0.9344 (171 TP, 2 FP, 22 FN).
+   - **Exact-Match Rate**: 17 / 32 cases (53.1%).
+   - **Remaining Mismatches**: 22 false negatives across 15 cases, primarily consisting of unlinked secondary analytics records or replica account snapshots where log evidence captures occurred after the respective `audit_at` cutoffs; and 2 false positives.
+
+3. **Synthetic Edge Cases (7 Cases)**:
+   - **Status Accuracy**: 1.000 (7 / 7 cases).
+   - **Exact-Match Rate**: 1.000 (7 / 7 cases).
+   - **Step F1**: 1.000 (25 TP, 0 FP, 0 FN).
+

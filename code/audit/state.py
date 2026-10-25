@@ -141,7 +141,9 @@ def reconstruct(dataset: Dataset, identity: Identity, audit_at: str | datetime, 
         if cutoff and not stamp and fact.captured_at and fact.captured_at > cutoff:
             continue
         if fact.source_kind == "activity" and "LINK_RESOURCE_IDENTITY" in fact.raw:
-            continue
+            req_time = parse_time(request.get("requested_at")) if request else None
+            if not req_time or not stamp or abs(stamp - req_time) > timedelta(days=7):
+                continue
         if _fact_matches(fact, identity):
             direct.append(fact)
     if request and cutoff:

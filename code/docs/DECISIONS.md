@@ -75,3 +75,11 @@ natural sample rows and the remaining 10 are the hold-out check.
 - **Issue:** A hand-written vision cache entry for `backup_restore_console_20260429.png` existed in `usage/vision_cache/` from an earlier test iteration when API rate limits were encountered.
 - **Action taken:** The hand-written cache entry was permanently deleted. The vision prompt in `code/audit/vision.py` was generalized to remove all specific resource IDs (bumping to `vision-facts-v3`). The vision model client was updated to `gemini-3-flash-preview` to resolve quota exhaustion. Real model calls were executed via the pipeline's own call path (`load_screenshot_facts`), extracting `backup_9287` and visible table sibling entries (`backup_9291`, `backup_9288`, `backup_9286`) with observed attributes and scope separation. `usage/usage.jsonl` and `usage_report.md` were regenerated from real calls.
 - **F1 before/after:** not separately measured on public samples (public 32 samples do not evaluate `backup_9287`).
+
+## 2026-10-25 — Multi-line log trace linking & activity catalog time-window matching
+
+- **Failure:** Full-dataset validation reported cases where COMPLETE had empty steps or INCOMPLETE lacked findings. Multi-line operations logs split customer emails from resource IDs across `tr-<num>` and `rb-<num>-<num>` traces.
+- **Cause:** Trace regex only matched explicit `trace_id=` or `trace:`, omitting standard `tr-\d+` and `rb-[\d-]+` log identifiers. Activity catalog identity links were unconditionally skipped, leaving unremediated cataloged resources unobserved.
+- **Fix:** Expanded `TRACE_RE` in `code/audit/ingest.py` to match `tr-\d+` and `rb-[\d-]+` log tokens. In `code/audit/state.py`, permitted `LINK_RESOURCE_IDENTITY` activity catalog events occurring within 7 days of the request time. In `code/audit/validate.py`, added verification checks for empty COMPLETE steps and tracked account absence coverage.
+- **F1 before/after:** sample step F1 remained `0.934`, status accuracy remained `1.000`, exact array match remained `0.531` (17/32). Full dataset validation errors dropped to 0 (`Passed: True`). Empty complete steps dropped from 8 to 0; complete cases lacking account absent dropped from 73 to 58. Synthetic tests: 7/7 passed (100% exact match).
+

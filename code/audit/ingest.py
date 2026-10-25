@@ -19,7 +19,7 @@ RESOURCE_RE = re.compile(
 EMAIL_RE = re.compile(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+")
 USER_RE = re.compile(r"\buser_[A-Za-z0-9-]+\b", re.I)
 PHONE_RE = re.compile(r"(?<![A-Za-z0-9])\+?[0-9][0-9 ()-]{6,}[0-9](?![A-Za-z0-9])")
-TRACE_RE = re.compile(r"\b(?:trace_id|trace)\s*[\"']?\s*[:=]\s*[\"']?([^\s\"'|,}]+)", re.I)
+TRACE_RE = re.compile(r"\b(?:trace_id|trace)\s*[\"']?\s*[:=]\s*[\"']?([^\s\"'|,}]+)|\b(tr-\d+|rb-[\d-]+)\b", re.I)
 
 
 def parse_time(value: str | None) -> datetime | None:
@@ -310,7 +310,8 @@ def _text_facts(evidence_id: str, captured: datetime | None, text: str, kind: st
     for line in lines:
         trace = TRACE_RE.search(line)
         if trace:
-            trace_values.setdefault(trace.group(1), set()).update(_identifier_values([line]))
+            tid = trace.group(1) or trace.group(2)
+            trace_values.setdefault(tid, set()).update(_identifier_values([line]))
     for line in lines:
         resources = list(dict.fromkeys(m.group(0) for m in RESOURCE_RE.finditer(line)))
         if not resources:
@@ -322,7 +323,8 @@ def _text_facts(evidence_id: str, captured: datetime | None, text: str, kind: st
         values = _identifier_values([line])
         trace = TRACE_RE.search(line)
         if trace:
-            values.update(trace_values.get(trace.group(1), set()))
+            tid = trace.group(1) or trace.group(2)
+            values.update(trace_values.get(tid, set()))
         for resource in resources:
             category = _category_from_resource(resource, line)
             system = _system_for_category(category, "")
