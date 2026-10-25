@@ -1,0 +1,11 @@
+[
+  {
+    "resource_id": "support_synth_01",
+    "system_id": "support_platform",
+    "user_id": "user_synth_01",
+    "email": "reused.alice@example.com",
+    "thread_id": "thread_8821",
+    "body": "Customer requested order assistance on 2024-05-10. Agent responded. Order #9910.",
+    "state": "PRESENT"
+  }
+]

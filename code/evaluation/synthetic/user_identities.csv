@@ -1,0 +1,9 @@
+user_id,name,email,phone,email_hash,updated_at
+user_synth_01,Alice Reused,reused.alice@example.com,+1 555-0101,806563126a246304caeea498675a0408228f38a83fd992be0b8bb0f045882e98,2025-06-02T10:00:00Z
+user_synth_02,Alice Newer,reused.alice@example.com,+1 555-0102,806563126a246304caeea498675a0408228f38a83fd992be0b8bb0f045882e98,2026-01-10T10:00:00Z
+user_synth_03,Old New User,new.email@example.com,+1 555-0199,cc0faf6597f54c2390d75ffad78fa9bf8a5c3cac8f35b24d014f4090139c22ab,2025-05-01T12:00:00Z
+user_synth_04,Sync Target,sync.target@example.com,+1 555-0104,c5ba679c5fc160e4a0eb4af18cb35ecfd5509a450e6eb186294e0f25e25ffa3a,2026-01-01T10:00:00Z
+user_synth_05,Tombstone User,tombstone.hash@example.com,+1 555-0105,0c9e019dc5906d802f5a03e8713556a5492620570d30833b88a42536aefd23bf,2026-01-01T10:00:00Z
+user_synth_06,Compliant User,compliant.user@example.com,+1 555-0106,6c61c4986ce653870d6914e0c2e957bbf40f931e19d590c90b5ebbea6ec7d7b4,2026-01-01T10:00:00Z
+user_synth_07,Backup User,backup.user@example.com,+1 555-0107,0fbb914b2f0f31fb8d788813bf250b3dd8491e7914127af7a26d02930dde1804,2026-01-01T10:00:00Z
+user_synth_08,Nondeletion User,nondeletion.user@example.com,+1 555-0108,9413f4504cea526b11fcde34a21f12c0c3bf4899fac5832d3d07c32acb4839f0,2026-01-01T10:00:00Z

@@ -1,0 +1,18 @@
+[
+  {
+    "resource_id": "data_flow_synth_04",
+    "system_id": "integration_service",
+    "user_id": "user_synth_04",
+    "email": "sync.target@example.com",
+    "status": "enabled",
+    "state": "ACTIVE"
+  },
+  {
+    "resource_id": "export_synth_04",
+    "system_id": "export_service",
+    "user_id": "user_synth_04",
+    "email": "sync.target@example.com",
+    "status": "recreated_by_sync",
+    "state": "PRESENT"
+  }
+]

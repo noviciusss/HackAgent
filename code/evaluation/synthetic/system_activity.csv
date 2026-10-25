@@ -1,0 +1,11 @@
+activity_id,event_time,event_type,source_system,target_system,resource_id,reported_result,details
+activity_synth_01,2025-06-02T10:05:00Z,DELETE_RECORD,account_service,account_service,account_synth_01,SUCCESS,Account deletion completed for user_synth_01.
+activity_synth_02,2026-08-01T12:05:00Z,DELETE_RECORD,account_service,account_service,account_synth_03,SUCCESS,Account deletion completed for user_synth_03.
+activity_synth_03,2026-08-11T10:00:00Z,DELETE_RECORD,account_service,account_service,account_synth_04,SUCCESS,Account deletion processed.
+activity_synth_04,2026-08-12T04:00:00Z,CHECK_DATA_FLOW,integration_service,integration_service,data_flow_synth_04,SUCCESS,Integration sync job data_flow_synth_04 is enabled and actively syncing.
+activity_synth_05,2026-08-12T04:05:00Z,INDEX_RECORD,integration_service,search_service,export_synth_04,SUCCESS,Sync job recreated export_synth_04 in search index.
+activity_synth_06,2026-07-02T10:00:00Z,DELETE_RECORD,account_service,account_service,account_synth_06,SUCCESS,Account deleted.
+activity_synth_07,2026-07-02T10:05:00Z,ANONYMIZE_RECORD,analytics_platform,analytics_platform,analytics_synth_06,SUCCESS,Telemetry and analytics profile anonymized.
+activity_synth_08,2026-07-02T10:10:00Z,RETAIN_RECORD,security_service,security_service,audit_record_synth_06,SUCCESS,Security audit trail preserved under mandatory 7-year retention.
+activity_synth_09,2026-08-15T09:00:00Z,DELETE_RECORD,account_service,account_service,account_synth_07,SUCCESS,Account record deleted.
+activity_synth_10,2026-08-15T09:05:00Z,CHECK_RESTORE_ACCESS,backup_service,backup_service,backup_synth_07,SUCCESS,Restore access is active and unblocked for snapshot backup_synth_07.

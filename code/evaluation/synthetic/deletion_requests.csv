@@ -1,0 +1,8 @@
+case_id,email,requested_at,reported_status,reported_at,audit_at,request_text
+case_syn_01,reused.alice@example.com,2025-06-01T10:00:00Z,COMPLETE,2025-06-02T10:00:00Z,2026-07-05T12:00:00Z,Please permanently erase my personal account and all associated customer data.
+case_syn_02,new.email@example.com,2026-08-01T10:00:00Z,COMPLETE,2026-08-01T12:00:00Z,2026-08-05T12:00:00Z,I request full deletion of my customer records and personal information under GDPR.
+case_syn_03,sync.target@example.com,2026-08-10T10:00:00Z,COMPLETE,2026-08-11T10:00:00Z,2026-08-15T12:00:00Z,Please close my account and remove all data across internal systems.
+case_syn_04,tombstone.hash@example.com,2026-08-15T10:00:00Z,COMPLETE,2026-08-16T10:00:00Z,2026-08-20T12:00:00Z,Please process my account deletion and erase all direct personal identifiers.
+case_syn_05,compliant.user@example.com,2026-07-01T10:00:00Z,COMPLETE,2026-07-02T10:00:00Z,2026-07-05T12:00:00Z,Please erase my account and purge all data eligible for deletion.
+case_syn_06,backup.user@example.com,2026-08-14T10:00:00Z,COMPLETE,2026-08-15T10:00:00Z,2026-08-20T12:00:00Z,Please process my right-to-be-forgotten request and remove my account.
+case_syn_07,nondeletion.user@example.com,2026-08-18T10:00:00Z,NOT_STARTED,2026-08-18T10:00:00Z,2026-08-20T12:00:00Z,Por favor no eliminen mi cuenta ni borren mis datos. Solo necesito actualizar mi direccion de envio.

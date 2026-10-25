@@ -1,0 +1,426 @@
+{
+  "all": {
+    "cases": 32,
+    "status_accuracy": 1.0,
+    "step_f1_with_evidence": 0.9344262295081968,
+    "step_f1_without_evidence": 0.9344262295081968,
+    "exact_array_match": 0.53125,
+    "tp": 171,
+    "fp": 2,
+    "fn": 22,
+    "loose_tp": 171,
+    "loose_fp": 2,
+    "loose_fn": 22
+  },
+  "dev": {
+    "cases": 22,
+    "status_accuracy": 1.0,
+    "step_f1_with_evidence": 0.9487179487179487,
+    "step_f1_without_evidence": 0.9487179487179487,
+    "exact_array_match": 0.7272727272727273,
+    "tp": 111,
+    "fp": 2,
+    "fn": 10,
+    "loose_tp": 111,
+    "loose_fp": 2,
+    "loose_fn": 10
+  },
+  "holdout": {
+    "cases": 10,
+    "status_accuracy": 1.0,
+    "step_f1_with_evidence": 0.9090909090909091,
+    "step_f1_without_evidence": 0.9090909090909091,
+    "exact_array_match": 0.1,
+    "tp": 60,
+    "fp": 0,
+    "fn": 12,
+    "loose_tp": 60,
+    "loose_fp": 0,
+    "loose_fn": 12
+  },
+  "split": {
+    "dev_cases": 22,
+    "holdout_cases": 10
+  },
+  "mismatches": {
+    "counts": {
+      "missing_step": 22,
+      "extra_step": 2
+    },
+    "cases": {
+      "missing_step": [
+        "case_03",
+        "case_04",
+        "case_18",
+        "case_20",
+        "case_21",
+        "case_22",
+        "case_23",
+        "case_25",
+        "case_26",
+        "case_27",
+        "case_28",
+        "case_29",
+        "case_30",
+        "case_31",
+        "case_32"
+      ],
+      "extra_step": [
+        "case_18",
+        "case_20"
+      ]
+    },
+    "examples": {
+      "missing_step": [
+        {
+          "case_id": "case_03",
+          "steps": [
+            [
+              "VERIFICATION",
+              "analytics_platform",
+              "analytics_9406",
+              "VERIFY_RECORD_ANONYMIZED",
+              "ANONYMIZED"
+            ]
+          ]
+        },
+        {
+          "case_id": "case_04",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_004",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ],
+            [
+              "VERIFICATION",
+              "analytics_platform",
+              "analytics_901",
+              "VERIFY_RECORD_ANONYMIZED",
+              "ANONYMIZED"
+            ]
+          ]
+        },
+        {
+          "case_id": "case_18",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_5521",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ],
+            [
+              "VERIFICATION",
+              "security_service",
+              "audit_record_6645",
+              "VERIFY_RECORD_PRESENT",
+              "PRESENT"
+            ]
+          ]
+        },
+        {
+          "case_id": "case_20",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_5037",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ],
+            [
+              "VERIFICATION",
+              "security_service",
+              "audit_record_5569",
+              "VERIFY_RECORD_PRESENT",
+              "PRESENT"
+            ]
+          ]
+        },
+        {
+          "case_id": "case_21",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_6440",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ],
+            [
+              "VERIFICATION",
+              "analytics_platform",
+              "analytics_5335",
+              "VERIFY_RECORD_ANONYMIZED",
+              "ANONYMIZED"
+            ]
+          ]
+        }
+      ],
+      "extra_step": [
+        {
+          "case_id": "case_18",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_5823",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ]
+          ]
+        },
+        {
+          "case_id": "case_20",
+          "steps": [
+            [
+              "VERIFICATION",
+              "account_service",
+              "account_5823",
+              "VERIFY_RECORD_ABSENT",
+              "ABSENT"
+            ]
+          ]
+        }
+      ]
+    },
+    "details": {
+      "case_03": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_9406",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_04": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_004",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_901",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_18": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_5521",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "security_service",
+            "audit_record_6645",
+            "VERIFY_RECORD_PRESENT",
+            "PRESENT"
+          ]
+        ],
+        "extra_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_5823",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_20": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_5037",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "security_service",
+            "audit_record_5569",
+            "VERIFY_RECORD_PRESENT",
+            "PRESENT"
+          ]
+        ],
+        "extra_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_5823",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_21": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_6440",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_5335",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_22": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_4990",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_23": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_410",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_25": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_3136",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_1895",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_26": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_4566",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_27": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_3866",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_4574",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_28": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_5482",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ],
+          [
+            "VERIFICATION",
+            "analytics_platform",
+            "analytics_6077",
+            "VERIFY_RECORD_ANONYMIZED",
+            "ANONYMIZED"
+          ]
+        ]
+      },
+      "case_29": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_7012",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_30": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_4163",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_31": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_4857",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      },
+      "case_32": {
+        "missing_step": [
+          [
+            "VERIFICATION",
+            "account_service",
+            "account_8858",
+            "VERIFY_RECORD_ABSENT",
+            "ABSENT"
+          ]
+        ]
+      }
+    }
+  }
+}

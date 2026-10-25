@@ -1,0 +1,13 @@
+[
+  {
+    "resource_id": "search_synth_03",
+    "system_id": "search_service",
+    "user_id": "user_synth_03",
+    "document": {
+      "indexed_email": "old.email@example.com",
+      "phone": "+1 555-0199",
+      "status": "active_index"
+    },
+    "state": "PRESENT"
+  }
+]

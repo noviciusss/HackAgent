@@ -1,0 +1,13 @@
+[
+  {
+    "resource_id": "tombstone_synth_05",
+    "system_id": "identity_service",
+    "user_id": "user_synth_05",
+    "status": "deleted_tombstone",
+    "retained_fields": {
+      "user_id": "user_synth_05",
+      "email_hash": "0c9e019dc5906d802f5a03e8713556a5492620570d30833b88a42536aefd23bf"
+    },
+    "state": "PRESENT"
+  }
+]

@@ -1,0 +1,7 @@
+file_id,file_path,origin,captured_at
+evidence_synth_01,evidence/support_threads.json,support_platform,2026-07-05T12:00:00Z
+evidence_synth_02,evidence/search_index_dump.json,search_service,2026-08-05T12:00:00Z
+evidence_synth_03,evidence/sync_log.json,integration_service,2026-08-15T12:00:00Z
+evidence_synth_04,evidence/account_tombstone.json,account_service,2026-08-20T12:00:00Z
+evidence_synth_05,evidence/audit_verification_bundle.json,assurance_service,2026-07-05T12:00:00Z
+evidence_synth_06,evidence/backup_registry.json,backup_service,2026-08-20T12:00:00Z

@@ -1,0 +1,9 @@
+[
+  {
+    "resource_id": "backup_synth_07",
+    "system_id": "backup_service",
+    "user_id": "user_synth_07",
+    "status": "unblocked_snapshot",
+    "state": "ACTIVE"
+  }
+]

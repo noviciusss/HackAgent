@@ -1,0 +1,44 @@
+[
+  {
+    "resource_id": "account_synth_01",
+    "system_id": "account_service",
+    "user_id": "user_synth_01",
+    "state": "ABSENT"
+  },
+  {
+    "resource_id": "account_synth_03",
+    "system_id": "account_service",
+    "user_id": "user_synth_03",
+    "state": "ABSENT"
+  },
+  {
+    "resource_id": "account_synth_04",
+    "system_id": "account_service",
+    "user_id": "user_synth_04",
+    "state": "ABSENT"
+  },
+  {
+    "resource_id": "account_synth_06",
+    "system_id": "account_service",
+    "user_id": "user_synth_06",
+    "state": "ABSENT"
+  },
+  {
+    "resource_id": "audit_record_synth_06",
+    "system_id": "security_service",
+    "user_id": "user_synth_06",
+    "state": "PRESENT"
+  },
+  {
+    "resource_id": "analytics_synth_06",
+    "system_id": "analytics_platform",
+    "user_id": "user_synth_06",
+    "state": "ANONYMIZED"
+  },
+  {
+    "resource_id": "account_synth_07",
+    "system_id": "account_service",
+    "user_id": "user_synth_07",
+    "state": "ABSENT"
+  }
+]
