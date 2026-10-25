@@ -59,9 +59,7 @@ def vision_model() -> str:
     configured = os.environ.get("VISION_MODEL", "").strip()
     if configured:
         return configured
-    if get_gemini_api_key():
-        return "gemini-3-flash-preview"
-    return "gpt-4o-mini"
+    return "gemini-3-flash-preview"
 
 
 
